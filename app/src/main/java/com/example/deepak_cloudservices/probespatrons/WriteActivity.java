@@ -1,6 +1,7 @@
 package com.example.deepak_cloudservices.probespatrons;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,5 +34,9 @@ public class WriteActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setLogo(R.drawable.icon);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
     }
 }
