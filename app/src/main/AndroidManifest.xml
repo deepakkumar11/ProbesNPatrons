@@ -18,7 +18,6 @@
         <activity android:name=".ReviewActivity" />
         <activity android:name=".ReadActivity" />
         <activity android:name=".WriteActivity" />
-        <activity android:name=".SplashActivity" />
         <activity android:name=".ThanksActivity"></activity>
     </application>
 
