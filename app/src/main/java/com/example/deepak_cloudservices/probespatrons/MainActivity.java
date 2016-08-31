@@ -14,14 +14,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-    Button button = (Button) findViewById(R.id.button);
+    Button button = (Button) findViewById(R.id.button1);
 
     button.setOnClickListener(new View.OnClickListener()
     {
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
+            Intent intent = new Intent(MainActivity.this, ReadActivity.class);
             startActivity(intent);
         }
     });
+
+        Button button1 = (Button) findViewById(R.id.button);
+
+        button1.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WriteActivity.class);
+                startActivity(intent);
+            }
+        });
 }
 }
