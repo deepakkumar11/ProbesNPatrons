@@ -12,14 +12,7 @@ public class ReadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read);
 
-        WebView wv = (WebView) findViewById(R.id.webView);
-        //  setContentView(R.layout.main_contacts);
-        final String mimeType = "text/html";
-        final String encoding = "UTF-8";
-        String html = "<br />" +
-                "<h1>Read Previous Reviews </h1>";
 
-        wv.loadDataWithBaseURL("", html, mimeType, encoding, "");
         ActionBar actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayUseLogoEnabled(true);
