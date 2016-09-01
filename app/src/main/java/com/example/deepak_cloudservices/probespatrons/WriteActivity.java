@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.squareup.okhttp.MediaType;
@@ -46,7 +47,9 @@ public class WriteActivity extends AppCompatActivity {
                 try {
                     EditText editText = (EditText) findViewById(R.id.editText);
                     final String review = editText.getText().toString();
-                    new AsyncPost().execute(review);
+                    RatingBar ratingbar = (RatingBar) findViewById(R.id.ratingBar);
+                    final float rating = ratingbar.getRating();
+                    new AsyncPost().execute(review, Float.toString(rating));
                 } catch (Exception e) {
                     Log.e("image", e.getLocalizedMessage());
                 }
@@ -82,7 +85,7 @@ public class WriteActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                makePost((String) params[0]);
+                makePost((String) params[0], (String) params[1]);
             } catch (Exception e) {
                 Log.e("image", e.getLocalizedMessage());
             }
@@ -94,12 +97,12 @@ public class WriteActivity extends AppCompatActivity {
 
     private final OkHttpClient client = new OkHttpClient();
 
-    private void makePost(String review) throws Exception {
+    private void makePost(String review, String rating) throws Exception {
         // Use the imgur image upload API as documented at https://api.imgur.com/endpoints/image
         RequestBody requestBody = new MultipartBuilder()
                 .type(MultipartBuilder.FORM)
                 .addFormDataPart("review", review)
-                .addFormDataPart("rating", "3.4")
+                .addFormDataPart("rating", rating)
                 .addFormDataPart("file", "bill.jpg",
                         RequestBody.create(MEDIA_TYPE_PNG, new File(selectedImagePath)))
                 .build();
