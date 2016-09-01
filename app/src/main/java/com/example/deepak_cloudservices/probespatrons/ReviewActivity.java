@@ -14,7 +14,7 @@ public class ReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_review);
 
 
-        Button button = (Button) findViewById(R.id.button2);
+        Button button = (Button) findViewById(R.id.submit_button);
 
         button.setOnClickListener(new View.OnClickListener()
 
