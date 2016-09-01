@@ -10,6 +10,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +33,9 @@ public class ReadActivity extends AppCompatActivity {
 
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
+    ArrayAdapter<String> aAdpt;
+    List<String> data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,23 +43,21 @@ public class ReadActivity extends AppCompatActivity {
         final Animation anim = AnimationUtils.loadAnimation(this, R.anim.fade_anim);
 
         final ListView listview = (ListView) findViewById(R.id.listView);
+        Button button = (Button) findViewById(R.id.button_search);
 
-        new AsyncFetch().execute();
-        String[] values = new String[]{"Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile"};
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditText textbox = (EditText) findViewById(R.id.searchText);
+                final String searchTerm = textbox.getText().toString();
+                new AsyncFetch().execute(searchTerm);
+            }
+        });
+        //
 
-        final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
-        }
+        data = new ArrayList<>();
 
-
-        final ArrayAdapter<String> aAdpt =
-                new ArrayAdapter<String>(this,
-                        android.R.layout.simple_list_item_1, list);
+        aAdpt = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, data);
 
         listview.setAdapter(aAdpt);
 
@@ -110,9 +113,11 @@ public class ReadActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
 
+
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
-                String searchTerm = "";
+                String searchTerm = params[0];
+
                 url = new URL("http://3creview.i3clogic.com/review/search/" + searchTerm);
 
             } catch (MalformedURLException e) {
@@ -128,8 +133,6 @@ public class ReadActivity extends AppCompatActivity {
                 conn.setConnectTimeout(CONNECTION_TIMEOUT);
                 conn.setRequestMethod("GET");
 
-                // setDoOutput to true as we recieve data from json file
-                conn.setDoOutput(true);
 
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
@@ -178,7 +181,6 @@ public class ReadActivity extends AppCompatActivity {
             //this method will be running on UI thread
 
             pdLoading.dismiss();
-            List<Review> data = new ArrayList<>();
 
             pdLoading.dismiss();
             try {
@@ -191,7 +193,8 @@ public class ReadActivity extends AppCompatActivity {
                     Review review = new Review();
                     review.setWriteup(json_data.getString("writeup"));
 
-                    data.add(review);
+                    data.add(review.getWriteup());
+                    aAdpt.notifyDataSetChanged();
                 }
 
             } catch (JSONException e) {

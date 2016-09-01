@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.deepak_cloudservices.probespatrons">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon"
-        android:label=" Probes&apos;n&apos;Patrons"
+        android:icon="@drawable/threecreview"
+        android:label="3Creview"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"></activity>
