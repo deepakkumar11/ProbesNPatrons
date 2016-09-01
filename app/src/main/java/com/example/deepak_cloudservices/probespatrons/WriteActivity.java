@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -35,7 +36,8 @@ public class WriteActivity extends AppCompatActivity {
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-
+        EditText editText=(EditText) findViewById(R.id.editText);
+        final String Name=editText.getText().toString();
         ImageButton buttonLoadImage = (ImageButton) findViewById(R.id.imageButton);
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
 
