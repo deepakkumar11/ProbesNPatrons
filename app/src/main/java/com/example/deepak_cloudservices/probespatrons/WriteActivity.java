@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.MultipartBuilder;
@@ -152,6 +153,7 @@ public class WriteActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
+                Toast.makeText(WriteActivity.this, "Image selected", Toast.LENGTH_LONG).show();
                 Button submitbutton = (Button) findViewById(R.id.submit_button);
                 submitbutton.setClickable(true);
                 Uri selectedImageUri = data.getData();
